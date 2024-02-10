@@ -42,7 +42,8 @@ def hello():
         'index.html',
         option_a=option_a,
         option_b=option_b,
-        hostname=hostname,
+        #hostname=hostname,
+        hostname=redis_host,
         vote=vote,
     ))
     resp.set_cookie('voter_id', voter_id)
