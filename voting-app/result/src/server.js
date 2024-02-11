@@ -78,7 +78,7 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
   next();
 });
-
+app.use(cors());
 app.use(express.static(__dirname + '/views'));
 
 app.get('/', function (req, res) {
