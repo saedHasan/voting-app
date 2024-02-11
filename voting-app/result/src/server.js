@@ -9,6 +9,7 @@ var express = require('express'),
     app = express(),
     server = require('http').Server(app),
     io = require('socket.io')(server);
+    cors = require('cors'); // Import the cors middleware
 
 io.set('transports', ['polling']);
 
@@ -73,7 +74,6 @@ app.use(cookieParser());
 app.use(bodyParser());
 app.use(methodOverride('X-HTTP-Method-Override'));
 
-var cors = require('cors'); // Import the cors middleware
 
 // Enable CORS for all routes
 app.use(cors());
