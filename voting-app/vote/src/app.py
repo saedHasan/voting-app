@@ -5,8 +5,7 @@ import socket
 import random
 import json
 import logging
-from flask import Flask
-from flask_cors import CORS
+
 
 option_a = os.getenv('OPTION_A', "Cats")
 option_b = os.getenv('OPTION_B', "Dogs")
@@ -16,8 +15,6 @@ redis_host = "redis"
 
 app = Flask(__name__)
 
-
-CORS(app)  # Initialize Flask-CORS with your Flask app
 
 gunicorn_error_logger = logging.getLogger('gunicorn.error')
 app.logger.handlers.extend(gunicorn_error_logger.handlers)
