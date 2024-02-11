@@ -17,7 +17,7 @@ class Worker {
       while (true) {
         String voteJSON = redis.blpop(0, "votes").get(1);
         JSONObject voteData = new JSONObject(voteJSON);
-        String voterID = voteData.getString("voter_id");
+        String voterID = voteData.getString("id");
         String vote = voteData.getString("vote");
 
         System.err.printf("Processing vote for '%s' by '%s'\n", vote, voterID);
