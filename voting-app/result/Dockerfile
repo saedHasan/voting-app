@@ -24,6 +24,9 @@ USER 1001
 
 COPY src/package*.json ./
 
+# Install cors package
+RUN npm install cors
+
 RUN npm ci \
  && npm cache clean --force
 
