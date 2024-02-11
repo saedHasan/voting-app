@@ -79,7 +79,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-const express = require('express');
 const cors = require('cors');
 const app = express();
 
