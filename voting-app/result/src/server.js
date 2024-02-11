@@ -73,17 +73,8 @@ app.use(cookieParser());
 app.use(bodyParser());
 app.use(methodOverride('X-HTTP-Method-Override'));
 
-app.use(function(req, res, next) {
-    // Allow requests from any origin
-    res.header('Access-Control-Allow-Origin', '*');
-    // Allow certain headers to be sent
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    // Allow certain HTTP methods
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    // Continue to the next middleware
-    next();
-});
-
+// Enable CORS for all routes
+app.use(cors());
 
 
 app.use(express.static(__dirname + '/views'));
