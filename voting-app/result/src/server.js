@@ -80,8 +80,6 @@ app.use(function(req, res, next) {
 });
 
 const cors = require('cors');
-const app = express();
-
 // Allow requests from all origins
 app.use(cors());
 
