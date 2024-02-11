@@ -79,9 +79,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-const cors = require('cors');
-// Allow requests from all origins
-app.use(cors());
+
 
 app.use(express.static(__dirname + '/views'));
 
