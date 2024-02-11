@@ -1,4 +1,3 @@
-const cors = require('cors'); // Import the cors middleware
 var express = require('express'),
     async = require('async'),
     pg = require('pg'),
@@ -73,6 +72,8 @@ function collectVotesFromResult(result) {
 app.use(cookieParser());
 app.use(bodyParser());
 app.use(methodOverride('X-HTTP-Method-Override'));
+
+var cors = require('cors'); // Import the cors middleware
 
 // Enable CORS for all routes
 app.use(cors());
