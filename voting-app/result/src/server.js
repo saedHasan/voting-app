@@ -13,7 +13,9 @@ var express = require('express'),
 const cors = require('cors');
 
 // Enable CORS for all routes
-app.use(cors());
+app.use(cors({
+    origin: "HTTP://localhost:8080",
+}));
 
 io.set('transports', ['polling']);
 
