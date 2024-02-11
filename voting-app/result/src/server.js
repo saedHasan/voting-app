@@ -1,3 +1,4 @@
+const cors = require('cors'); // Import the cors middleware
 var express = require('express'),
     async = require('async'),
     pg = require('pg'),
