@@ -10,6 +10,11 @@ var express = require('express'),
     server = require('http').Server(app),
     io = require('socket.io')(server);
 
+const cors = require('cors');
+
+// Enable CORS for all routes
+app.use(cors());
+
 io.set('transports', ['polling']);
 
 var port = process.env.PORT || 8080;
