@@ -30,7 +30,8 @@ RUN npm ci \
 COPY src/. .
 
 ENV PORT 8080
-
+# Disable source map generation (adjust as needed for your build tool)
+ENV GENERATE_SOURCEMAP=false
 EXPOSE 8080
 
 CMD ["/tini", "--", "node", "server.js"]
