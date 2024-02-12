@@ -56,6 +56,7 @@ socket.on('disconnect', function() {
   };
   socket.on('message',function(data){
     init();
+    updateScores();
   });
 });
 
