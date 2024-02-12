@@ -47,7 +47,9 @@ socket.on('disconnect', function() {
 });
 
   var init = function(){
+    console.log('im in init');
     document.body.style.opacity=1;
+    console.log('init 2');
     updateScores();
   };
   socket.on('message',function(data){
