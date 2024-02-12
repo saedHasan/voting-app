@@ -55,6 +55,7 @@ async.retry(
 
 function getVotes(client) {
   client.query('SELECT vote, COUNT(id) AS count FROM votes GROUP BY vote', [], function(err, result) {
+       console.error("blaaaaaaaa");
     if (err) {
       console.error("Error performing query: " + err);
     } else {
