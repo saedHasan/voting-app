@@ -91,6 +91,7 @@ class Worker {
     }
 
     System.err.println("Connected to db");
+    System.err.println("Connected to dbbbbbbbbbbb");
     return conn;
   }
 
