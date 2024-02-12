@@ -9,7 +9,11 @@ app.controller('statsCtrl', function($scope){
   $scope.bPercent = 0;
 
   var updateScores = function(){
+    console.log('updateScores in  ..........');
+
     socket.on('scores', function (json) {
+      console.log('socket.on function  ..........');
+
        data = JSON.parse(json);
        var a = parseInt(data.a || 0);
        var b = parseInt(data.b || 0);
@@ -33,16 +37,20 @@ app.controller('statsCtrl', function($scope){
   };
   socket.on('message',function(data){
     init();
+    updateScores();
   });
 });
 
 function getPercentages(a, b) {
+  console.log('getPercentages ..........');
   var result = {};
 
   if (a + b > 0) {
     result.a = Math.round(a / (a + b) * 100);
     result.b = 100 - result.a;
   } else {
+    console.log('getPercentages error  ..........');
+
     result.a = result.b = 50;
   }
 
