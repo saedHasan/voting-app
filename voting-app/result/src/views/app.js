@@ -13,7 +13,7 @@ app.controller('statsCtrl', function($scope){
        data = JSON.parse(json);
        var a = parseInt(data.a || 0);
        var b = parseInt(data.b || 0);
-
+       console.log('Received scoressssssssssss:', data); // Log received data
        var percentages = getPercentages(a, b);
 
        bg1.style.width = percentages.a + "%";
