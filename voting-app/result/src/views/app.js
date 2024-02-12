@@ -8,26 +8,47 @@ app.controller('statsCtrl', function($scope){
   $scope.aPercent = 50;
   $scope.bPercent = 50;
 
-  // Event listener to handle 'scores' event emitted by the server
-  socket.on('scores', function (json) {
-    var data = JSON.parse(json);
-    var a = parseInt(data.a || 0);
-    var b = parseInt(data.b || 0);
+  var updateScores = function(){
+    socket.on('scores', function (json) {
+       data = JSON.parse(json);
+       var a = parseInt(data.a || 0);
+       var b = parseInt(data.b || 0);
 
-    var percentages = getPercentages(a, b);
+       var percentages = getPercentages(a, b);
 
-    bg1.style.width = percentages.a + "%";
-    bg2.style.width = percentages.b + "%";
+       bg1.style.width = percentages.a + "%";
+       bg2.style.width = percentages.b + "%";
 
-    $scope.$apply(function () {
-      $scope.aPercent = percentages.a;
-      $scope.bPercent = percentages.b;
-      $scope.total = a + b;
+       $scope.$apply(function () {
+         $scope.aPercent = percentages.a;
+         $scope.bPercent = percentages.b;
+         $scope.total = a + b;
+       });
     });
-  });
+  };
+ // Log when the connection is established
+socket.on('connect', function() {
+    console.log('Connected to Socket.IO server');
+});
+
+// Log when data is received
+socket.on('scores', function(json) {
+    console.log('Received scores:', json);
+});
+
+// Log any errors
+socket.on('error', function(error) {
+    console.error('Socket.IO error:', error);
+});
+
+// Log when the connection is closed
+socket.on('disconnect', function() {
+    console.log('Disconnected from Socket.IO server');
+});
 
   var init = function(){
     document.body.style.opacity=1;
+    updateScores();
   };
   socket.on('message',function(data){
     init();
