@@ -134,7 +134,8 @@ namespace Worker
         {
             var command = connection.CreateCommand();
             try
-            {
+            {   
+                Console.Error.WriteLine("INSERT INTO votes (id, vote) VALUES " , voterId, vote);
                 command.CommandText = "INSERT INTO votes (id, vote) VALUES (@id, @vote)";
                 command.Parameters.AddWithValue("@id", voterId);
                 command.Parameters.AddWithValue("@vote", vote);
