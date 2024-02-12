@@ -26,25 +26,6 @@ app.controller('statsCtrl', function($scope){
        });
     });
   };
- // Log when the connection is established
-socket.on('connect', function() {
-    console.log('Connected to Socket.IO server');
-});
-
-// Log when data is received
-socket.on('scores', function(json) {
-    console.log('Received scores:', json);
-});
-
-// Log any errors
-socket.on('error', function(error) {
-    console.error('Socket.IO error:', error);
-});
-
-// Log when the connection is closed
-socket.on('disconnect', function() {
-    console.log('Disconnected from Socket.IO server');
-});
 
   var init = function(){
     document.body.style.opacity=1;
