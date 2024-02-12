@@ -5,17 +5,12 @@ import socket
 import random
 import json
 import logging
-from flask_cors import CORS
 
 option_a = os.getenv('OPTION_A', "Cats")
 option_b = os.getenv('OPTION_B', "Dogs")
 hostname = socket.gethostname()
-redis_password=os.getenv('REDIS_PASSWORD')
-redis_host = "redis" 
 
 app = Flask(__name__)
-CORS(app)
-
 
 gunicorn_error_logger = logging.getLogger('gunicorn.error')
 app.logger.handlers.extend(gunicorn_error_logger.handlers)
@@ -23,12 +18,12 @@ app.logger.setLevel(logging.INFO)
 
 def get_redis():
     if not hasattr(g, 'redis'):
-        g.redis = Redis(host=redis_host, db=0, socket_timeout=5, password=redis_password)
+        g.redis = Redis(host="redis", db=0, socket_timeout=5)
     return g.redis
 
 @app.route("/", methods=['POST','GET'])
 def hello():
-    voter_id = request.cookies.get('id')
+    voter_id = request.cookies.get('voter_id')
     if not voter_id:
         voter_id = hex(random.getrandbits(64))[2:-1]
 
@@ -38,7 +33,7 @@ def hello():
         redis = get_redis()
         vote = request.form['vote']
         app.logger.info('Received vote for %s', vote)
-        data = json.dumps({'id': voter_id, 'vote': vote})
+        data = json.dumps({'voter_id': voter_id, 'vote': vote})
         redis.rpush('votes', data)
 
     resp = make_response(render_template(
@@ -48,9 +43,9 @@ def hello():
         hostname=hostname,
         vote=vote,
     ))
-    resp.set_cookie('id', voter_id)
+    resp.set_cookie('voter_id', voter_id)
     return resp
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080, debug=True, threaded=True)
+    app.run(host='0.0.0.0', port=80, debug=True, threaded=True)
